@@ -201,17 +201,18 @@ export default function Settings() {
           <TabsContent value="profile">
             <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
               <div className="lg:col-span-2">
-                <Card>
-                  <CardHeader>
-                    <CardTitle>
-                      <div className="flex items-center gap-2">
-                        <div className="w-8 h-8 bg-gradient-to-r from-valasys-orange to-valasys-orange-light rounded-lg flex items-center justify-center">
-                          <User className="w-4 h-4 text-white" />
+                <div className="sticky top-6 self-start">
+                  <Card>
+                    <CardHeader>
+                      <CardTitle>
+                        <div className="flex items-center gap-2">
+                          <div className="w-8 h-8 bg-gradient-to-r from-valasys-orange to-valasys-orange-light rounded-lg flex items-center justify-center">
+                            <User className="w-4 h-4 text-white" />
+                          </div>
+                          <span>Personal Information</span>
                         </div>
-                        <span>Personal Information</span>
-                      </div>
-                    </CardTitle>
-                  </CardHeader>
+                      </CardTitle>
+                    </CardHeader>
                   <CardContent className="space-y-4">
                     <div className="space-y-2">
                       <Label>Profile Photo</Label>
@@ -469,6 +470,7 @@ export default function Settings() {
                     </div>
                   </CardContent>
                 </Card>
+                </div>
               </div>
 
               <div>
