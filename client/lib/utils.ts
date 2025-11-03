@@ -3,7 +3,6 @@ import {
   Link as RouterLink,
   type LinkProps as RouterLinkProps,
 } from "react-router-dom";
-import { Slot } from "@radix-ui/react-slot";
 import { clsx, type ClassValue } from "clsx";
 import { twMerge } from "tailwind-merge";
 
@@ -11,10 +10,12 @@ export function cn(...inputs: ClassValue[]) {
   return twMerge(clsx(inputs));
 }
 
-export const Link = React.forwardRef<HTMLAnchorElement, RouterLinkProps & { asChild?: boolean }>(
-  ({ asChild = false, ...props }, ref) => {
-    const Comp = asChild ? Slot : RouterLink;
-    return React.createElement(Comp, { ...props, ref } as any);
+export const Link = React.forwardRef<HTMLAnchorElement, RouterLinkProps>(
+  (props, ref) => {
+    return React.createElement(RouterLink, {
+      ...props,
+      ref,
+    } as any);
   },
 );
 Link.displayName = "Link";
