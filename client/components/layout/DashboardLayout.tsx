@@ -1106,11 +1106,14 @@ export default function DashboardLayout({ children }: DashboardLayoutProps) {
                             </span>
                             <Tooltip>
                               <TooltipTrigger asChild>
-                                <button className="inline-flex items-center justify-center w-4 h-4 rounded-full bg-gray-300 hover:bg-gray-400 text-white cursor-help transition-colors">
+                                <button
+                                  onClick={() => navigate("/subscription")}
+                                  className="inline-flex items-center justify-center w-4 h-4 rounded-full bg-gray-300 hover:bg-gray-400 text-white cursor-help transition-colors"
+                                >
                                   <Info className="w-3 h-3" />
                                 </button>
                               </TooltipTrigger>
-                              <TooltipContent side="right" className="max-w-xs">
+                              <TooltipContent side="top" className="max-w-xs">
                                 <p className="text-sm">Upgrade Your Current Plan</p>
                               </TooltipContent>
                             </Tooltip>
