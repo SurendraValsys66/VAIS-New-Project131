@@ -155,6 +155,55 @@ export default function WishlistProspects() {
     setSelectedList(null);
   };
 
+  const handleDownload = (list: ProspectList) => {
+    if (!list.prospects || list.prospects.length === 0) {
+      toast({
+        title: "No Data",
+        description: "This list has no prospects to download",
+        variant: "destructive",
+      });
+      return;
+    }
+
+    try {
+      // Create CSV header
+      const csvHeader = ["Prospect ID", "List Name", "Created Date"];
+      const csvRows = list.prospects.map((prospectId) => [
+        prospectId,
+        list.name,
+        formatDate(list.createdAt),
+      ]);
+
+      // Combine header and rows
+      const csvContent = [
+        csvHeader.join(","),
+        ...csvRows.map((row) => row.map((cell) => `"${cell}"`).join(",")),
+      ].join("\n");
+
+      // Create blob and download
+      const blob = new Blob([csvContent], { type: "text/csv;charset=utf-8;" });
+      const link = document.createElement("a");
+      const url = URL.createObjectURL(blob);
+      link.setAttribute("href", url);
+      link.setAttribute("download", `${list.name.replace(/\s+/g, "_")}_prospects.csv`);
+      link.style.visibility = "hidden";
+      document.body.appendChild(link);
+      link.click();
+      document.body.removeChild(link);
+
+      toast({
+        title: "Success",
+        description: `Downloaded ${list.prospects.length} prospect${list.prospects.length !== 1 ? "s" : ""} from "${list.name}"`,
+      });
+    } catch (error) {
+      toast({
+        title: "Error",
+        description: "Failed to download list",
+        variant: "destructive",
+      });
+    }
+  };
+
   const formatDate = (dateString: string) => {
     try {
       const date = new Date(dateString);
