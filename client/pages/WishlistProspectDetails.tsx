@@ -603,6 +603,15 @@ export default function WishlistProspectDetails() {
     actions: true,
   });
 
+  const [filters, setFilters] = useState({
+    jobFunction: "",
+    jobLevel: "",
+    company: "",
+    country: "",
+    revenue: "",
+    engagementRange: { min: 0, max: 100 },
+  });
+
   const columns = [
     { key: "prospect", label: "Prospect" },
     { key: "company", label: "Company" },
