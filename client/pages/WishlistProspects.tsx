@@ -25,7 +25,7 @@ import {
   DialogHeader,
   DialogTitle,
   DialogFooter,
-} from "@/components/ui/dialog";
+} from "@/components/ui/dialog"; // Keep for edit dialog
 import {
   AlertDialog,
   AlertDialogAction,
@@ -70,7 +70,6 @@ export default function WishlistProspects() {
   });
 
   const [searchTerm, setSearchTerm] = useState("");
-  const [viewDialogOpen, setViewDialogOpen] = useState(false);
   const [editDialogOpen, setEditDialogOpen] = useState(false);
   const [deleteAlertOpen, setDeleteAlertOpen] = useState(false);
   const [selectedList, setSelectedList] = useState<ProspectList | null>(null);
