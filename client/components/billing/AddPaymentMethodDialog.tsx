@@ -149,7 +149,7 @@ export function AddPaymentMethodDialog({
   );
 
   useEffect(() => {
-    if (editingMethod) {
+    if (open && editingMethod) {
       setPaymentType(
         editingMethod.type === "paypal" ? "paypal" : "card",
       );
@@ -162,8 +162,7 @@ export function AddPaymentMethodDialog({
         paypalEmail:
           editingMethod.type === "paypal" ? editingMethod.cardNumber : "",
       });
-    } else {
-      resetForm();
+      setErrors([]);
     }
   }, [editingMethod, open]);
 
