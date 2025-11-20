@@ -1235,6 +1235,12 @@ export default function Payments() {
             </Card>
           </TabsContent>
         </Tabs>
+
+        <AddPaymentMethodDialog
+          open={addPaymentDialogOpen}
+          onOpenChange={setAddPaymentDialogOpen}
+          onAdd={handleAddPaymentMethod}
+        />
       </div>
     </DashboardLayout>
   );
