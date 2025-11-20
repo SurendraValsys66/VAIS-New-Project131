@@ -366,7 +366,7 @@ function ModernPaymentCard({
             </div>
           </div>
         ) : (
-          <div className="relative rounded-2xl overflow-hidden h-52 bg-white border-2 border-gray-200 hover:border-gray-300 shadow-sm hover:shadow-md transition-all duration-300 transform hover:scale-105 p-6 flex flex-col justify-between">
+          <div className="relative rounded-2xl overflow-hidden h-52 bg-white border-2 border-gray-300 hover:border-gray-400 shadow-sm hover:shadow-md transition-all duration-300 transform hover:scale-105 p-6 flex flex-col justify-between">
             <div className="flex items-start justify-between">
               <div className="space-y-1">
                 <div className="text-xs font-semibold text-gray-500 tracking-wider">
@@ -412,7 +412,7 @@ function ModernPaymentCard({
                   <p className="text-lg font-mono font-bold text-gray-900 tracking-widest">
                     {isPayPal
                       ? method.cardNumber
-                      : `•••• •••• •••• ${method.cardNumber}`}
+                      : `•��•• •••• •••• ${method.cardNumber}`}
                   </p>
                 </div>
                 {!isPayPal && (
