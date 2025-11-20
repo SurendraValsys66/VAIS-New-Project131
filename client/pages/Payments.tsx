@@ -76,15 +76,6 @@ const COUNTRIES = [
   "Switzerland",
 ];
 
-interface AddPaymentFormData {
-  cardholderName: string;
-  cardNumber: string;
-  expiryDate: string;
-  cvc: string;
-  country: string;
-  paypalEmail: string;
-}
-
 const paymentMethods: PaymentMethod[] = [
   {
     id: "pm_1",
