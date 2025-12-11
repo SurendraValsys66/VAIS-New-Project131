@@ -88,22 +88,12 @@ export function FeedbackModal({ open, onOpenChange }: FeedbackModalProps) {
 
   return (
     <Dialog open={open} onOpenChange={onOpenChange}>
-      <DialogContent className="max-w-lg bg-white p-0 gap-0 [&>button]:hidden">
-        <DialogHeader className="p-6 pb-4 border-b border-gray-200 flex flex-row items-center justify-between">
+      <DialogContent className="max-w-lg bg-white">
+        <div className="flex items-center justify-between pb-4 border-b border-gray-200 -mx-6 px-6">
           <h2 className="text-xl font-semibold text-gray-900">Feedback</h2>
-          <DialogClose asChild>
-            <Button
-              variant="ghost"
-              size="icon"
-              className="h-6 w-6 p-0 hover:bg-gray-100 rounded-md"
-              aria-label="Close"
-            >
-              <X className="h-5 w-5" />
-            </Button>
-          </DialogClose>
-        </DialogHeader>
+        </div>
 
-        <div className="p-6 space-y-6">
+        <div className="space-y-6">
           {/* Rating Section */}
           <div className="space-y-3 text-center">
             <h3 className="text-xl font-bold text-gray-900">
