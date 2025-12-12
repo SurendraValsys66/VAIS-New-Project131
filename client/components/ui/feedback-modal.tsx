@@ -11,10 +11,9 @@ interface FeedbackModalProps {
 }
 
 export function FeedbackModal({ open, onOpenChange }: FeedbackModalProps) {
-  const [rating, setRating] = useState<number | null>(3);
+  const [rating, setRating] = useState<number | null>(null);
   const [comment, setComment] = useState("");
   const [hoveredRating, setHoveredRating] = useState<number | null>(null);
-  const gifRefs = useRef<Record<number, HTMLImageElement | null>>({});
   const { toast } = useToast();
 
   const handleSendFeedback = () => {
@@ -24,7 +23,7 @@ export function FeedbackModal({ open, onOpenChange }: FeedbackModalProps) {
     }
 
     console.log("Feedback submitted:", { rating, comment });
-    setRating(3);
+    setRating(null);
     setComment("");
     onOpenChange(false);
 
@@ -34,77 +33,6 @@ export function FeedbackModal({ open, onOpenChange }: FeedbackModalProps) {
       description:
         "We appreciate your input and will use it to improve our service.",
     });
-  };
-
-  const insertFormatting = (format: string) => {
-    const textarea = document.getElementById(
-      "feedback-textarea",
-    ) as HTMLTextAreaElement;
-    if (!textarea) return;
-
-    const start = textarea.selectionStart;
-    const end = textarea.selectionEnd;
-    const selectedText = comment.substring(start, end);
-    let newText = comment;
-    let cursorPos = start;
-
-    switch (format) {
-      case "bold":
-        newText =
-          comment.substring(0, start) +
-          `**${selectedText}**` +
-          comment.substring(end);
-        cursorPos = start + 2 + selectedText.length + 2;
-        break;
-      case "italic":
-        newText =
-          comment.substring(0, start) +
-          `*${selectedText}*` +
-          comment.substring(end);
-        cursorPos = start + 1 + selectedText.length + 1;
-        break;
-      case "strikethrough":
-        newText =
-          comment.substring(0, start) +
-          `~~${selectedText}~~` +
-          comment.substring(end);
-        cursorPos = start + 2 + selectedText.length + 2;
-        break;
-      case "link":
-        newText =
-          comment.substring(0, start) +
-          `[${selectedText || "link"}](url)` +
-          comment.substring(end);
-        cursorPos = start + 1 + (selectedText || "link").length + 3;
-        break;
-      case "list":
-        newText =
-          comment.substring(0, start) +
-          `\n- ${selectedText}\n` +
-          comment.substring(end);
-        cursorPos = start + 3 + selectedText.length;
-        break;
-      case "ordered-list":
-        newText =
-          comment.substring(0, start) +
-          `\n1. ${selectedText}\n` +
-          comment.substring(end);
-        cursorPos = start + 4 + selectedText.length;
-        break;
-      case "code":
-        newText =
-          comment.substring(0, start) +
-          `\`${selectedText}\`` +
-          comment.substring(end);
-        cursorPos = start + 1 + selectedText.length + 1;
-        break;
-    }
-
-    setComment(newText);
-    setTimeout(() => {
-      textarea.focus();
-      textarea.setSelectionRange(cursorPos, cursorPos);
-    }, 0);
   };
 
   return (
