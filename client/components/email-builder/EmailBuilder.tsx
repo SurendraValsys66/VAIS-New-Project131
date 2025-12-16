@@ -220,13 +220,13 @@ export const EmailBuilder: React.FC<EmailBuilderProps> = ({
               </div>
 
               {/* Center - Editor Canvas */}
-              <div className="flex-1 overflow-y-auto p-8 bg-gray-100">
-                <div className="max-w-2xl mx-auto bg-white rounded-lg shadow-md overflow-hidden">
+              <div className="flex-1 overflow-y-auto p-6 bg-gray-50">
+                <div className="max-w-2xl mx-auto">
                   {/* Template Settings */}
-                  <div className="bg-gray-50 border-b border-gray-200 p-4">
+                  <div className="bg-white border border-gray-200 rounded-t-lg p-4">
                     <div className="grid grid-cols-2 gap-4">
                       <div>
-                        <Label htmlFor="subject" className="text-xs">
+                        <Label htmlFor="subject" className="text-xs font-medium text-gray-700">
                           Subject
                         </Label>
                         <Input
@@ -234,25 +234,39 @@ export const EmailBuilder: React.FC<EmailBuilderProps> = ({
                           value={templateSubject}
                           onChange={(e) => setTemplateSubject(e.target.value)}
                           placeholder="Email subject"
-                          className="text-sm"
+                          className="text-sm mt-1"
                         />
                       </div>
                       <div>
-                        <Label htmlFor="bgColor" className="text-xs">
+                        <Label htmlFor="bgColor" className="text-xs font-medium text-gray-700">
                           Background
                         </Label>
-                        <Input
-                          id="bgColor"
-                          type="color"
-                          value={template.backgroundColor}
-                          onChange={(e) =>
-                            setTemplate({
-                              ...template,
-                              backgroundColor: e.target.value,
-                            })
-                          }
-                          className="text-sm"
-                        />
+                        <div className="flex gap-2 mt-1">
+                          <Input
+                            id="bgColor"
+                            type="color"
+                            value={template.backgroundColor}
+                            onChange={(e) =>
+                              setTemplate({
+                                ...template,
+                                backgroundColor: e.target.value,
+                              })
+                            }
+                            className="text-sm w-12 h-10"
+                          />
+                          <Input
+                            type="text"
+                            value={template.backgroundColor}
+                            onChange={(e) =>
+                              setTemplate({
+                                ...template,
+                                backgroundColor: e.target.value,
+                              })
+                            }
+                            className="text-sm flex-1"
+                            placeholder="#ffffff"
+                          />
+                        </div>
                       </div>
                     </div>
                   </div>
@@ -263,25 +277,33 @@ export const EmailBuilder: React.FC<EmailBuilderProps> = ({
                       backgroundColor: template.backgroundColor,
                       padding: `${template.padding}px`,
                     }}
+                    className="bg-white border border-t-0 border-gray-200 rounded-b-lg shadow-sm min-h-96"
                   >
                     {template.blocks.length === 0 ? (
-                      <div className="text-center py-12 text-gray-400">
-                        <p className="mb-2">No blocks yet</p>
-                        <p className="text-sm">
-                          Add blocks from the left toolbar to get started
+                      <div className="text-center py-16 text-gray-400">
+                        <div className="flex justify-center mb-4">
+                          <div className="w-16 h-16 bg-gray-100 rounded-lg flex items-center justify-center">
+                            <Mail className="w-8 h-8 text-gray-300" />
+                          </div>
+                        </div>
+                        <p className="mb-2 text-gray-600 font-medium">Drop content here</p>
+                        <p className="text-sm text-gray-400">
+                          Add blocks from the left sidebar to get started
                         </p>
                       </div>
                     ) : (
-                      template.blocks.map((block) => (
-                        <div key={block.id}>
-                          <BlockRenderer
-                            block={block}
-                            isSelected={selectedBlockId === block.id}
-                            onBlockUpdate={handleUpdateBlock}
-                            onBlockSelect={setSelectedBlockId}
-                          />
-                        </div>
-                      ))
+                      <div className="space-y-0">
+                        {template.blocks.map((block) => (
+                          <div key={block.id}>
+                            <BlockRenderer
+                              block={block}
+                              isSelected={selectedBlockId === block.id}
+                              onBlockUpdate={handleUpdateBlock}
+                              onBlockSelect={setSelectedBlockId}
+                            />
+                          </div>
+                        ))}
+                      </div>
                     )}
                   </div>
                 </div>
