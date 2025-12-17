@@ -60,6 +60,7 @@ export const TextBlockComponent: React.FC<TextBlockComponentProps> = ({
             borderColor: block.borderColor,
             borderStyle: block.borderWidth > 0 ? "solid" : "none",
             borderRadius: `${block.borderRadius}px`,
+            userSelect: "text",
           }}
         />
       ) : (
@@ -78,6 +79,7 @@ export const TextBlockComponent: React.FC<TextBlockComponentProps> = ({
             borderStyle: block.borderWidth > 0 ? "solid" : "none",
             borderRadius: `${block.borderRadius}px`,
             margin: 0,
+            userSelect: "none",
           }}
         >
           {block.content}
