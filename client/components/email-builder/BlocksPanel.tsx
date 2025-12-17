@@ -165,61 +165,20 @@ const SectionsPanel: React.FC<SectionsPanelProps> = ({ onAddBlock }) => {
 
   const textImageTemplates: Template[] = [
     {
-      id: "image-top-text-bottom",
-      title: "Image with text",
-      description: "Image on top with text description below",
+      id: "centered-image-card",
+      title: "Image Card with Title & CTA",
+      description: "Centered layout with image banner, title, description and call-to-action button",
       preview:
         "https://images.unsplash.com/photo-1470114716159-e389f8712fda?w=400&h=200&fit=crop",
-      blocks: () => [createImageBlock(), createTextBlock()],
+      blocks: () => [createCenteredImageCardBlock()],
     },
     {
-      id: "image-left-text-right",
-      title: "Two column layout",
-      description: "Image and text side by side",
+      id: "split-image-card",
+      title: "Image + Content Split Card",
+      description: "Left image with right content - title, description, optional label and CTA",
       preview:
         "https://images.unsplash.com/photo-1454165804606-c3d57bc86b40?w=400&h=200&fit=crop",
-      blocks: () => [createImageBlock(), createTextBlock()],
-    },
-    {
-      id: "hero-section",
-      title: "Hero section",
-      description: "Full width image with overlay text",
-      preview:
-        "https://images.unsplash.com/photo-1504384308090-c894fdcc538d?w=400&h=200&fit=crop",
-      blocks: () => [createImageBlock(), createTitleBlock(), createTextBlock()],
-    },
-    {
-      id: "image-grid",
-      title: "Image grid",
-      description: "Multiple images in a grid layout",
-      preview:
-        "https://images.unsplash.com/photo-1506717206882-14319dc5e69c?w=400&h=200&fit=crop",
-      blocks: () => [
-        createImageBlock(),
-        createImageBlock(),
-        createImageBlock(),
-      ],
-    },
-    {
-      id: "featured-image",
-      title: "Featured image",
-      description: "Large featured image with small text",
-      preview:
-        "https://images.unsplash.com/photo-1552664730-d307ca884978?w=400&h=200&fit=crop",
-      blocks: () => [createImageBlock(), createTitleBlock()],
-    },
-    {
-      id: "text-image-button",
-      title: "Image with CTA",
-      description: "Image, text and call to action button",
-      preview:
-        "https://images.unsplash.com/photo-1517694712202-14dd9538aa97?w=400&h=200&fit=crop",
-      blocks: () => [
-        createImageBlock(),
-        createTitleBlock(),
-        createTextBlock(),
-        createButtonBlock(),
-      ],
+      blocks: () => [createSplitImageCardBlock()],
     },
   ];
 
