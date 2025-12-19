@@ -214,7 +214,16 @@ export const EmailBuilder: React.FC<EmailBuilderProps> = ({
                 <Button
                   variant="outline"
                   size="sm"
-                  onClick={onBack}
+                  onClick={() => {
+                    const updated = {
+                      ...template,
+                      name: templateName,
+                      subject: templateSubject,
+                      updatedAt: new Date().toISOString(),
+                    };
+                    saveTemplateToLocalStorage(updated);
+                    onBack();
+                  }}
                   className="gap-2"
                 >
                   <ChevronLeft className="w-4 h-4" />

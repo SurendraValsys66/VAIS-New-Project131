@@ -38,8 +38,8 @@ export const ImageBlockComponent: React.FC<ImageBlockComponentProps> = ({
           src={block.src}
           alt={block.alt}
           style={{
-            width: `${block.width}px`,
-            height: `${block.height}px`,
+            width: `${block.width}${block.widthUnit}`,
+            height: `${block.height}${block.heightUnit}`,
             display: block.alignment === "center" ? "block" : "inline",
             margin: block.alignment === "center" ? "0 auto" : "0",
           }}

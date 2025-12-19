@@ -22,7 +22,7 @@ export const BlockToolbar: React.FC<BlockToolbarProps> = ({
   onDelete,
 }) => {
   return (
-    <div className="flex gap-1 p-2 bg-white border border-gray-200 rounded-lg shadow-sm">
+    <div className="flex gap-1 px-1 py-2 bg-white border border-gray-200 rounded-lg shadow-sm">
       <Button
         variant="ghost"
         size="sm"
