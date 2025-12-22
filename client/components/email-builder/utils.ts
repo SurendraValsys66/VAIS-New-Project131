@@ -815,7 +815,7 @@ export function renderBlockToHTML(block: ContentBlock): string {
           const backgroundColor = getBackgroundColor(platform.name);
           const borderColor = getBorderColor(platform.name);
           const iconColor = getIconColor(platform.name);
-          const iconHtml = getSocialIcon(platform.icon);
+          const iconHtml = getSocialIcon(platform.icon, iconColor);
 
           return `<a href="${platform.url}" style="display: inline-flex; align-items: center; justify-content: center; width: ${iconSize + 16}px; height: ${iconSize + 16}px; background-color: ${backgroundColor}; border: 2px solid ${borderColor}; border-radius: ${borderRadius}; margin: 0 ${socialBlock.spacing / 2}px; text-decoration: none; color: ${iconColor}; transition: transform 0.2s;">${iconHtml}</a>`;
         })
