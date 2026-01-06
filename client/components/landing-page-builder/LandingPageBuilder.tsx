@@ -147,10 +147,12 @@ export const LandingPageBuilder: React.FC<LandingPageBuilderProps> = ({
     );
   }
 
+  const selectedBlock = page.blocks.find((b) => b.id === selectedBlockId) || null;
+
   return (
     <div className="flex h-screen bg-gray-100">
       {/* Left Sidebar - Blocks Panel */}
-      <div className="w-72 bg-white border-r border-gray-200 overflow-y-auto">
+      <div className="w-72 bg-white border-r border-gray-200 overflow-y-auto flex flex-col">
         <div className="sticky top-0 z-20 bg-white border-b border-gray-200 p-4">
           <Button
             variant="ghost"
@@ -159,7 +161,7 @@ export const LandingPageBuilder: React.FC<LandingPageBuilderProps> = ({
             onClick={onBack}
           >
             <ChevronLeft className="w-4 h-4 mr-2" />
-            Back to Landing Pages
+            Back
           </Button>
         </div>
         <BlocksPanel onAddBlock={handleAddBlock} />
@@ -189,7 +191,7 @@ export const LandingPageBuilder: React.FC<LandingPageBuilderProps> = ({
 
         {/* Preview Area */}
         <div className="flex-1 overflow-y-auto bg-gray-50 p-8">
-          <div className="max-w-5xl mx-auto">
+          <div className="max-w-4xl mx-auto">
             <LandingPagePreview
               page={page}
               selectedBlockId={selectedBlockId}
@@ -200,6 +202,23 @@ export const LandingPageBuilder: React.FC<LandingPageBuilderProps> = ({
             />
           </div>
         </div>
+      </div>
+
+      {/* Right Sidebar - Settings Panel */}
+      <div className="w-80 bg-white border-l border-gray-200 overflow-y-auto">
+        <SettingsPanel
+          block={selectedBlock}
+          onBlockUpdate={(updatedBlock) => {
+            if (selectedBlock) {
+              handleUpdateBlock(selectedBlock.id, updatedBlock.properties);
+            }
+          }}
+          onBlockDelete={() => {
+            if (selectedBlockId) {
+              handleDeleteBlock(selectedBlockId);
+            }
+          }}
+        />
       </div>
     </div>
   );
