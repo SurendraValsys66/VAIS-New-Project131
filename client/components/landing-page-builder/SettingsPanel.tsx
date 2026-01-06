@@ -516,8 +516,8 @@ export const SettingsPanel: React.FC<SettingsPanelProps> = ({
   };
 
   return (
-    <div className="bg-white border-l border-gray-200 h-full overflow-y-auto">
-      <div className="sticky top-0 bg-white border-b border-gray-200 px-4 py-3 flex items-center justify-between">
+    <div className="bg-white border-l border-gray-200 h-full flex flex-col overflow-hidden">
+      <div className="sticky top-0 bg-white border-b border-gray-200 px-4 py-3 flex items-center justify-between flex-shrink-0">
         <h3 className="font-semibold text-gray-900 text-sm capitalize">
           {block.type.replace("-", " ")}
         </h3>
@@ -530,7 +530,7 @@ export const SettingsPanel: React.FC<SettingsPanelProps> = ({
           <Trash2 className="w-4 h-4" />
         </Button>
       </div>
-      <div className="p-4">{renderSettings()}</div>
+      <div className="p-4 overflow-y-auto flex-1">{renderSettings()}</div>
     </div>
   );
 };
