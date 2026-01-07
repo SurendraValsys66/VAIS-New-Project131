@@ -132,6 +132,11 @@ export const LandingPageBuilder: React.FC<LandingPageBuilderProps> = ({
       "template-2": createHeroBlock,
       "template-3": createFeaturesBlock,
       "template-4": createAboutBlock,
+      "template-5": createAboutBlock,
+      "template-6": createFeaturesBlock,
+      "template-7": createFeaturesBlock,
+      "template-8": createHeaderBlock,
+      "template-9": createTestimonialsBlock,
     };
 
     const blockCreator = templateBlockMap[templateId];
