@@ -17,7 +17,6 @@ import {
 } from "./utils";
 import { LandingPagePreview } from "./LandingPagePreview";
 import { BlocksPanel } from "./BlocksPanel";
-import { SettingsPanel } from "./SettingsPanel";
 
 interface LandingPageBuilderProps {
   pageId?: string;
