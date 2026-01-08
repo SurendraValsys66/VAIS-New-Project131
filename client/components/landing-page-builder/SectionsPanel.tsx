@@ -247,6 +247,7 @@ const sectionTemplates: SectionTemplate[] = [
         </div>
       </div>
     ),
+    blocks: createPricingTemplate,
   },
   {
     id: "template-faq",
@@ -273,6 +274,7 @@ const sectionTemplates: SectionTemplate[] = [
         </div>
       </div>
     ),
+    blocks: createFaqTemplate,
   },
   {
     id: "template-signup",
@@ -291,6 +293,7 @@ const sectionTemplates: SectionTemplate[] = [
         </div>
       </div>
     ),
+    blocks: createSignupTemplate,
   },
   {
     id: "template-footer",
@@ -323,6 +326,7 @@ const sectionTemplates: SectionTemplate[] = [
         </div>
       </div>
     ),
+    blocks: createPricingFooterTemplate,
   },
 ];
 
