@@ -3240,53 +3240,490 @@ export const SettingsPanel: React.FC<SettingsPanelProps> = ({
         );
       case "video":
         return (
-          <div className="space-y-4">
+          <div className="space-y-5">
             <div>
-              <Label htmlFor="videoSrc">Video URL</Label>
-              <Input
-                id="videoSrc"
-                value={block.src}
-                onChange={(e) =>
-                  onBlockUpdate({ ...block, src: e.target.value })
-                }
-                placeholder="https://example.com/video.mp4"
-              />
+              <Label className="text-xs font-semibold text-gray-700 mb-2 block">
+                Content
+              </Label>
+              <div className="space-y-3">
+                <div>
+                  <Label htmlFor="videoSrc" className="text-xs text-gray-700 mb-1 block">
+                    Video URL
+                  </Label>
+                  <Input
+                    id="videoSrc"
+                    value={block.src}
+                    onChange={(e) =>
+                      onBlockUpdate({ ...block, src: e.target.value })
+                    }
+                    placeholder="https://example.com/video.mp4"
+                    className="focus:ring-valasys-orange focus:ring-2"
+                  />
+                </div>
+                <div>
+                  <Label htmlFor="videoThumb" className="text-xs text-gray-700 mb-1 block">
+                    Thumbnail URL
+                  </Label>
+                  <Input
+                    id="videoThumb"
+                    value={block.thumbnail}
+                    onChange={(e) =>
+                      onBlockUpdate({ ...block, thumbnail: e.target.value })
+                    }
+                    placeholder="https://example.com/thumb.jpg"
+                    className="focus:ring-valasys-orange focus:ring-2"
+                  />
+                </div>
+              </div>
             </div>
+
             <div>
-              <Label htmlFor="videoThumb">Thumbnail URL</Label>
-              <Input
-                id="videoThumb"
-                value={block.thumbnail}
-                onChange={(e) =>
-                  onBlockUpdate({ ...block, thumbnail: e.target.value })
-                }
-                placeholder="https://example.com/thumb.jpg"
-              />
+              <h4 className="text-xs font-bold text-gray-900 mb-3">Layout</h4>
+              <div className="space-y-3">
+                <div>
+                  <Label className="text-xs text-gray-700 mb-1 block">
+                    Width
+                  </Label>
+                  <div className="flex gap-2">
+                    <Input
+                      type="number"
+                      min="0"
+                      max="100"
+                      value={block.width ?? 300}
+                      onChange={(e) =>
+                        onBlockUpdate({
+                          ...block,
+                          width: parseInt(e.target.value) || 300,
+                        })
+                      }
+                      className="flex-1 focus:ring-valasys-orange focus:ring-2"
+                    />
+                    <select
+                      value={block.widthUnit ?? "px"}
+                      onChange={(e) =>
+                        onBlockUpdate({
+                          ...block,
+                          widthUnit: e.target.value as "px" | "%",
+                        })
+                      }
+                      className="px-2 border border-gray-300 rounded text-sm focus:outline-none focus:ring-2 focus:ring-valasys-orange"
+                    >
+                      <option value="%">%</option>
+                      <option value="px">px</option>
+                    </select>
+                  </div>
+                </div>
+
+                <div>
+                  <Label className="text-xs text-gray-700 mb-1 block">
+                    Height
+                  </Label>
+                  <div className="flex gap-2">
+                    <Input
+                      type="number"
+                      min="0"
+                      value={block.height ?? 200}
+                      onChange={(e) =>
+                        onBlockUpdate({
+                          ...block,
+                          height: parseInt(e.target.value) || 200,
+                        })
+                      }
+                      className="flex-1 focus:ring-valasys-orange focus:ring-2"
+                    />
+                    <span className="px-2 py-1 text-sm text-gray-600">px</span>
+                  </div>
+                </div>
+
+                <div>
+                  <Label className="text-xs text-gray-700 mb-1 block">
+                    Block Alignment
+                  </Label>
+                  <div className="flex gap-2">
+                    <Button
+                      variant={
+                        block.alignment === "left" ? "default" : "outline"
+                      }
+                      size="sm"
+                      className="flex-1"
+                      onClick={() =>
+                        onBlockUpdate({ ...block, alignment: "left" })
+                      }
+                    >
+                      ⬅
+                    </Button>
+                    <Button
+                      variant={
+                        block.alignment === "center" ? "default" : "outline"
+                      }
+                      size="sm"
+                      className="flex-1"
+                      onClick={() =>
+                        onBlockUpdate({ ...block, alignment: "center" })
+                      }
+                    >
+                      ⬇
+                    </Button>
+                    <Button
+                      variant={
+                        block.alignment === "right" ? "default" : "outline"
+                      }
+                      size="sm"
+                      className="flex-1"
+                      onClick={() =>
+                        onBlockUpdate({ ...block, alignment: "right" })
+                      }
+                    >
+                      ➡
+                    </Button>
+                  </div>
+                </div>
+              </div>
             </div>
+
             <div>
-              <Label htmlFor="videoWidth">Width (px)</Label>
-              <Input
-                id="videoWidth"
-                type="number"
-                value={block.width}
-                onChange={(e) =>
-                  onBlockUpdate({ ...block, width: parseInt(e.target.value) })
-                }
-              />
+              <div className="flex items-center justify-between mb-3">
+                <h4 className="text-xs font-bold text-gray-900">Spacing</h4>
+              </div>
+              <div className="space-y-3">
+                <div>
+                  <div className="flex items-center justify-between mb-2">
+                    <Label className="text-xs text-gray-700">Padding</Label>
+                    <div className="flex items-center gap-2">
+                      <Checkbox
+                        id="videoGroupPadding"
+                        checked={groupPaddingSides}
+                        onCheckedChange={(checked) =>
+                          setGroupPaddingSides(checked as boolean)
+                        }
+                      />
+                      <Label
+                        htmlFor="videoGroupPadding"
+                        className="text-xs text-gray-600 cursor-pointer"
+                      >
+                        Group sides
+                      </Label>
+                    </div>
+                  </div>
+                  {groupPaddingSides ? (
+                    <div className="flex gap-2">
+                      <Input
+                        type="number"
+                        min="0"
+                        value={paddingTop}
+                        onChange={(e) =>
+                          handlePaddingChange(parseInt(e.target.value))
+                        }
+                        className="flex-1 focus:ring-valasys-orange focus:ring-2"
+                      />
+                      <span className="px-2 py-1 text-sm text-gray-600">
+                        px
+                      </span>
+                    </div>
+                  ) : (
+                    <div className="grid grid-cols-2 gap-2">
+                      <div className="flex items-center gap-1">
+                        <span className="text-xs text-gray-600 w-6 text-center">
+                          ↑
+                        </span>
+                        <Input
+                          type="number"
+                          min="0"
+                          value={paddingTop}
+                          onChange={(e) =>
+                            handlePaddingChange(parseInt(e.target.value), "top")
+                          }
+                          className="flex-1 focus:ring-valasys-orange focus:ring-2"
+                        />
+                      </div>
+                      <div className="flex items-center gap-1">
+                        <span className="text-xs text-gray-600 w-6 text-center">
+                          →
+                        </span>
+                        <Input
+                          type="number"
+                          min="0"
+                          value={paddingRight}
+                          onChange={(e) =>
+                            handlePaddingChange(
+                              parseInt(e.target.value),
+                              "right",
+                            )
+                          }
+                          className="flex-1 focus:ring-valasys-orange focus:ring-2"
+                        />
+                      </div>
+                      <div className="flex items-center gap-1">
+                        <span className="text-xs text-gray-600 w-6 text-center">
+                          ↓
+                        </span>
+                        <Input
+                          type="number"
+                          min="0"
+                          value={paddingBottom}
+                          onChange={(e) =>
+                            handlePaddingChange(
+                              parseInt(e.target.value),
+                              "bottom",
+                            )
+                          }
+                          className="flex-1 focus:ring-valasys-orange focus:ring-2"
+                        />
+                      </div>
+                      <div className="flex items-center gap-1">
+                        <span className="text-xs text-gray-600 w-6 text-center">
+                          ←
+                        </span>
+                        <Input
+                          type="number"
+                          min="0"
+                          value={paddingLeft}
+                          onChange={(e) =>
+                            handlePaddingChange(
+                              parseInt(e.target.value),
+                              "left",
+                            )
+                          }
+                          className="flex-1 focus:ring-valasys-orange focus:ring-2"
+                        />
+                      </div>
+                    </div>
+                  )}
+                </div>
+
+                <div>
+                  <div className="flex items-center justify-between mb-2">
+                    <Label className="text-xs text-gray-700">Margin</Label>
+                    <div className="flex items-center gap-2">
+                      <Checkbox
+                        id="videoGroupMargin"
+                        checked={groupMarginSides}
+                        onCheckedChange={(checked) =>
+                          setGroupMarginSides(checked as boolean)
+                        }
+                      />
+                      <Label
+                        htmlFor="videoGroupMargin"
+                        className="text-xs text-gray-600 cursor-pointer"
+                      >
+                        Group sides
+                      </Label>
+                    </div>
+                  </div>
+                  {groupMarginSides ? (
+                    <div className="flex gap-2">
+                      <Input
+                        type="number"
+                        min="0"
+                        value={marginTop}
+                        onChange={(e) =>
+                          handleMarginChange(parseInt(e.target.value))
+                        }
+                        className="flex-1 focus:ring-valasys-orange focus:ring-2"
+                      />
+                      <span className="px-2 py-1 text-sm text-gray-600">
+                        px
+                      </span>
+                    </div>
+                  ) : (
+                    <div className="grid grid-cols-2 gap-2">
+                      <div className="flex items-center gap-1">
+                        <span className="text-xs text-gray-600 w-6 text-center">
+                          ↑
+                        </span>
+                        <Input
+                          type="number"
+                          min="0"
+                          value={marginTop}
+                          onChange={(e) =>
+                            handleMarginChange(parseInt(e.target.value), "top")
+                          }
+                          className="flex-1 focus:ring-valasys-orange focus:ring-2"
+                        />
+                      </div>
+                      <div className="flex items-center gap-1">
+                        <span className="text-xs text-gray-600 w-6 text-center">
+                          →
+                        </span>
+                        <Input
+                          type="number"
+                          min="0"
+                          value={marginRight}
+                          onChange={(e) =>
+                            handleMarginChange(
+                              parseInt(e.target.value),
+                              "right",
+                            )
+                          }
+                          className="flex-1 focus:ring-valasys-orange focus:ring-2"
+                        />
+                      </div>
+                      <div className="flex items-center gap-1">
+                        <span className="text-xs text-gray-600 w-6 text-center">
+                          ↓
+                        </span>
+                        <Input
+                          type="number"
+                          min="0"
+                          value={marginBottom}
+                          onChange={(e) =>
+                            handleMarginChange(
+                              parseInt(e.target.value),
+                              "bottom",
+                            )
+                          }
+                          className="flex-1 focus:ring-valasys-orange focus:ring-2"
+                        />
+                      </div>
+                      <div className="flex items-center gap-1">
+                        <span className="text-xs text-gray-600 w-6 text-center">
+                          ←
+                        </span>
+                        <Input
+                          type="number"
+                          min="0"
+                          value={marginLeft}
+                          onChange={(e) =>
+                            handleMarginChange(
+                              parseInt(e.target.value),
+                              "left",
+                            )
+                          }
+                          className="flex-1 focus:ring-valasys-orange focus:ring-2"
+                        />
+                      </div>
+                    </div>
+                  )}
+                </div>
+              </div>
             </div>
+
             <div>
-              <Label htmlFor="videoHeight">Height (px)</Label>
-              <Input
-                id="videoHeight"
-                type="number"
-                value={block.height}
-                onChange={(e) =>
-                  onBlockUpdate({
-                    ...block,
-                    height: parseInt(e.target.value),
-                  })
-                }
-              />
+              <h4 className="text-xs font-bold text-gray-900 mb-3">
+                Rounded corners
+              </h4>
+              <div className="space-y-3">
+                <div>
+                  <Label className="text-xs text-gray-700 mb-1 block">
+                    Radius
+                  </Label>
+                  <div className="flex gap-2">
+                    <Input
+                      type="number"
+                      min="0"
+                      value={block.borderRadius || 0}
+                      onChange={(e) =>
+                        onBlockUpdate({
+                          ...block,
+                          borderRadius: parseInt(e.target.value) || 0,
+                        })
+                      }
+                      className="flex-1 focus:ring-valasys-orange focus:ring-2"
+                    />
+                    <span className="px-2 py-1 text-sm text-gray-600">px</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div>
+              <div className="flex items-center justify-between mb-3">
+                <h4 className="text-xs font-bold text-gray-900">Borders</h4>
+                <div className="flex items-center gap-2">
+                  <Checkbox
+                    id="videoApplyBorder"
+                    checked={applyBorderToAllSides}
+                    onCheckedChange={(checked) =>
+                      setApplyBorderToAllSides(checked as boolean)
+                    }
+                  />
+                  <Label
+                    htmlFor="videoApplyBorder"
+                    className="text-xs text-gray-600 cursor-pointer"
+                  >
+                    Apply to all sides
+                  </Label>
+                </div>
+              </div>
+              <div className="space-y-3">
+                <div>
+                  <Label className="text-xs text-gray-700 mb-1 block">
+                    Size
+                  </Label>
+                  <div className="flex gap-2">
+                    <Input
+                      type="number"
+                      min="0"
+                      value={block.borderWidth || 0}
+                      onChange={(e) =>
+                        onBlockUpdate({
+                          ...block,
+                          borderWidth: parseInt(e.target.value) || 0,
+                        })
+                      }
+                      className="flex-1 focus:ring-valasys-orange focus:ring-2"
+                    />
+                    <span className="px-2 py-1 text-sm text-gray-600">px</span>
+                  </div>
+                </div>
+
+                <div>
+                  <Label className="text-xs text-gray-700 mb-1 block">
+                    Color
+                  </Label>
+                  <Input
+                    type="color"
+                    value={block.borderColor || "#000000"}
+                    onChange={(e) =>
+                      onBlockUpdate({ ...block, borderColor: e.target.value })
+                    }
+                  />
+                </div>
+              </div>
+            </div>
+
+            <div>
+              <h4 className="text-xs font-bold text-gray-900 mb-3">
+                Content visibility
+              </h4>
+              <p className="text-xs text-gray-500 mb-3">
+                Display content based on the type of device or other specific
+                conditions
+              </p>
+              <div className="flex gap-2 flex-wrap">
+                <Button
+                  variant={block.visibility === "all" ? "default" : "outline"}
+                  size="sm"
+                  onClick={() => onBlockUpdate({ ...block, visibility: "all" })}
+                  className="text-xs"
+                >
+                  All devices
+                </Button>
+                <Button
+                  variant={
+                    block.visibility === "desktop" ? "default" : "outline"
+                  }
+                  size="sm"
+                  onClick={() =>
+                    onBlockUpdate({ ...block, visibility: "desktop" })
+                  }
+                  className="text-xs"
+                >
+                  Only on desktop
+                </Button>
+                <Button
+                  variant={
+                    block.visibility === "mobile" ? "default" : "outline"
+                  }
+                  size="sm"
+                  onClick={() =>
+                    onBlockUpdate({ ...block, visibility: "mobile" })
+                  }
+                  className="text-xs"
+                >
+                  Only on mobile
+                </Button>
+              </div>
             </div>
           </div>
         );
