@@ -68,26 +68,9 @@ export const SourceCodeView: React.FC<SourceCodeViewProps> = ({ template }) => {
 
   const handleDownloadInlineHTML = () => {
     try {
-      // Create pure HTML with inline CSS
-      const bgColor = template.backgroundColor || "#ffffff";
-      const padding = template.padding || 0;
-
-      const inlineHTMLContent = `<!DOCTYPE html>
-<html>
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>${template.subject || "Email Template"}</title>
-</head>
-<body style="background-color: ${bgColor}; padding: ${padding}px; font-family: Arial, sans-serif; margin: 0;">
-  <div style="max-width: 600px; margin: 0 auto;">
-    ${htmlContent || "<p>Empty template</p>"}
-  </div>
-</body>
-</html>`;
-
+      // htmlContent is already a complete HTML document from renderTemplateToHTML
       const element = document.createElement("a");
-      const file = new Blob([inlineHTMLContent], { type: "text/html" });
+      const file = new Blob([htmlContent], { type: "text/html" });
       element.href = URL.createObjectURL(file);
       element.download = `${template.name || "template"}.html`;
       document.body.appendChild(element);
