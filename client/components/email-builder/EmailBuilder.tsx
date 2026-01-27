@@ -308,21 +308,6 @@ export const EmailBuilder: React.FC<EmailBuilderProps> = ({
                   </TooltipContent>
                 </Tooltip>
 
-                <Tooltip>
-                  <TooltipTrigger asChild>
-                    <Button
-                      variant="outline"
-                      size="sm"
-                      onClick={handleDownloadHTML}
-                    >
-                      <Download className="w-4 h-4" />
-                    </Button>
-                  </TooltipTrigger>
-                  <TooltipContent className="font-medium">
-                    Download HTML
-                  </TooltipContent>
-                </Tooltip>
-
                 <Button
                   onClick={() => setShowSaveDialog(true)}
                   className="gap-2 bg-valasys-orange hover:bg-valasys-orange/90 text-white"
