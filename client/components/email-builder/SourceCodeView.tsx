@@ -75,17 +75,31 @@ export const SourceCodeView: React.FC<SourceCodeViewProps> = ({ template }) => {
     toast.success("HTML downloaded successfully");
   };
 
-  const handleDownloadJSON = () => {
-    const templateJson = JSON.stringify(template, null, 2);
+  const handleDownloadInlineHTML = () => {
+    // Create pure HTML with inline CSS
+    const inlineHTMLContent = `<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>${template.subject}</title>
+</head>
+<body style="background-color: ${template.backgroundColor || "#ffffff"}; padding: ${template.padding || 0}px; font-family: Arial, sans-serif; margin: 0;">
+  <div style="max-width: 600px; margin: 0 auto;">
+${htmlContent.substring(htmlContent.indexOf("<div style=\"max-width:"), htmlContent.lastIndexOf("</div>") + 6)}
+  </div>
+</body>
+</html>`;
+
     const element = document.createElement("a");
-    const file = new Blob([templateJson], { type: "application/json" });
+    const file = new Blob([inlineHTMLContent], { type: "text/html" });
     element.href = URL.createObjectURL(file);
-    element.download = `${template.name || "template"}.json`;
+    element.download = `${template.name || "template"}.html`;
     document.body.appendChild(element);
     element.click();
     document.body.removeChild(element);
 
-    toast.success("Template JSON downloaded successfully");
+    toast.success("Pure HTML with inline CSS downloaded successfully");
   };
 
   const handleDownloadPDF = () => {
