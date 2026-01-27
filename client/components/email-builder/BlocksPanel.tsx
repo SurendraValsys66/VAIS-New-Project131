@@ -398,6 +398,22 @@ const SectionsPanel: React.FC<SectionsPanelProps> = ({ onAddBlock }) => {
 
 export const BlocksPanel: React.FC<BlocksPanelProps> = ({ onAddBlock }) => {
   const [searchQuery, setSearchQuery] = useState("");
+  const [activeTab, setActiveTab] = useState<TabValue>("blocks");
+
+  // Load saved tab preference from localStorage
+  React.useEffect(() => {
+    const savedTab = localStorage.getItem("email-builder-active-tab") as TabValue | null;
+    if (savedTab && ["blocks", "sections", "saved"].includes(savedTab)) {
+      setActiveTab(savedTab);
+    }
+  }, []);
+
+  // Save tab preference to localStorage whenever it changes
+  const handleTabChange = (value: string) => {
+    const tabValue = value as TabValue;
+    setActiveTab(tabValue);
+    localStorage.setItem("email-builder-active-tab", tabValue);
+  };
 
   const blockOptions: BlockOption[] = [
     {
