@@ -585,45 +585,47 @@ export default function VAISResults() {
     setUnlockModalOpen(true);
   };
 
-  const handleUnlock = (selectedOption: string) => {
-    let badgesToUnlock: string[] = [];
+  const handleUnlock = (selectedOptions: string[]) => {
+    let badgesToUnlock: Set<string> = new Set();
 
-    switch (selectedOption) {
-      case "current":
-        // Unlock only the currently clicked badge
-        if (currentlyClickedBadgeId) {
-          badgesToUnlock = [currentlyClickedBadgeId];
-        }
-        break;
+    selectedOptions.forEach((selectedOption) => {
+      switch (selectedOption) {
+        case "current":
+          // Unlock only the currently clicked badge
+          if (currentlyClickedBadgeId) {
+            badgesToUnlock.add(currentlyClickedBadgeId);
+          }
+          break;
 
-      case "super_strong":
-        // Unlock only companies with "Super Strong" intent signal
-        badgesToUnlock = paginatedData
-          .filter((item) => item.intentSignal === "Super Strong")
-          .map((item) => item.id);
-        break;
+        case "super_strong":
+          // Unlock only companies with "Super Strong" intent signal
+          paginatedData
+            .filter((item) => item.intentSignal === "Super Strong")
+            .forEach((item) => badgesToUnlock.add(item.id));
+          break;
 
-      case "very_strong":
-        // Unlock companies with "Very Strong" intent signal
-        badgesToUnlock = paginatedData
-          .filter((item) => item.intentSignal === "Very Strong")
-          .map((item) => item.id);
-        break;
+        case "very_strong":
+          // Unlock companies with "Very Strong" intent signal
+          paginatedData
+            .filter((item) => item.intentSignal === "Very Strong")
+            .forEach((item) => badgesToUnlock.add(item.id));
+          break;
 
-      case "strong":
-        // Unlock companies with "Strong" intent signal
-        badgesToUnlock = paginatedData
-          .filter((item) => item.intentSignal === "Strong")
-          .map((item) => item.id);
-        break;
+        case "strong":
+          // Unlock companies with "Strong" intent signal
+          paginatedData
+            .filter((item) => item.intentSignal === "Strong")
+            .forEach((item) => badgesToUnlock.add(item.id));
+          break;
 
-      case "all":
-        // Unlock all badges
-        badgesToUnlock = paginatedData.map((item) => item.id);
-        break;
-    }
+        case "all":
+          // Unlock all badges
+          paginatedData.forEach((item) => badgesToUnlock.add(item.id));
+          break;
+      }
+    });
 
-    if (badgesToUnlock.length > 0) {
+    if (badgesToUnlock.size > 0) {
       setUnlockedBadges((prev) => new Set([...prev, ...badgesToUnlock]));
     }
   };
