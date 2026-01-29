@@ -72,39 +72,18 @@ export default function UnlockIntentSignalModal({
       <DialogContent className="sm:max-w-2xl p-0 border-0 rounded-xl overflow-hidden">
         <div className="bg-white">
           {/* Header Section */}
-          <div className="relative bg-gradient-to-br from-slate-900 to-slate-800 p-8 sm:p-10 text-white overflow-hidden">
-            {/* Decorative background elements */}
-            <div className="absolute inset-0 opacity-10">
-              <div className="absolute top-0 right-0 w-40 h-40 bg-valasys-orange rounded-full blur-3xl"></div>
-              <div className="absolute bottom-0 left-0 w-32 h-32 bg-blue-500 rounded-full blur-3xl"></div>
-            </div>
-
-            <div className="relative z-10">
-              <div className="flex items-start justify-between gap-4">
-                <div className="flex-1">
-                  {/* Badge */}
-                  <div className="inline-flex items-center gap-2 px-3 py-1.5 bg-gradient-to-r from-valasys-orange to-orange-500 rounded-full mb-4">
-                    <Zap className="w-3.5 h-3.5 text-white" />
-                    <span className="text-xs font-semibold tracking-wide">Premium Feature</span>
-                  </div>
-
-                  {/* Main heading */}
-                  <h2 className="text-4xl sm:text-5xl font-bold tracking-tight mb-3">
-                    Unlock Intent<br />Signals
-                  </h2>
-
-                  {/* Description */}
-                  <p className="text-gray-300 text-base leading-relaxed max-w-md">
-                    Access real-time buying intent data powered by Bombora and uncover deeper insights into company behaviors
-                  </p>
-                </div>
-
-                {/* Icon decoration */}
-                <div className="hidden sm:block flex-shrink-0">
-                  <div className="w-24 h-24 rounded-2xl bg-gradient-to-br from-valasys-orange/20 to-blue-500/20 backdrop-blur-sm border border-white/10 flex items-center justify-center">
-                    <Zap className="w-12 h-12 text-valasys-orange opacity-80" />
-                  </div>
-                </div>
+          <div className="bg-gradient-to-r from-slate-50 to-slate-100 px-6 py-5 border-b border-gray-200">
+            <div className="flex items-start gap-4">
+              <div className="p-2.5 bg-gradient-to-br from-valasys-orange to-orange-500 rounded-lg flex-shrink-0">
+                <Zap className="w-5 h-5 text-white" />
+              </div>
+              <div className="flex-1 min-w-0">
+                <h2 className="text-xl font-bold text-gray-900">
+                  Unlock Intent Signals
+                </h2>
+                <p className="text-sm text-gray-600 mt-1">
+                  Powered by Bombora – Access real-time buying intent insights
+                </p>
               </div>
             </div>
           </div>
